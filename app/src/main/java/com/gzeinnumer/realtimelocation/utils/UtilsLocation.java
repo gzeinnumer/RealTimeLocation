@@ -43,7 +43,7 @@ public class UtilsLocation {
         }
     }
 
-    public static String getDistanceInM(String newLA, String newLG, String oldLA, String oldLG) {
+    public static String getDistanceInKM(String newLA, String newLG, String oldLA, String oldLG) {
         String latituteSales = newLA.equals("0.0") ? "-6.181583" : newLA;
         String longituteSales = newLG.equals("0.0") ? "106.832392" : newLG;
 
