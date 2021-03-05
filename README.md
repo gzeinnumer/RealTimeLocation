@@ -1,6 +1,6 @@
 # RealTimeLocation
 
-- Manifest
+- `manifests.xml`
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <manifest >
@@ -23,7 +23,7 @@
 </manifest>
 ```
 
-- LocationUpdateService.java
+- [LocationUpdateService.java](https://github.com/gzeinnumer/RealTimeLocation/blob/master/app/src/main/AndroidManifest.xml)
 ```java
 public class LocationUpdateService extends Service {
 

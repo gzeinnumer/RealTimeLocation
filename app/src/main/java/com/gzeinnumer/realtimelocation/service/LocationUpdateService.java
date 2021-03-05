@@ -242,7 +242,7 @@ public class LocationUpdateService extends Service {
         locationPref.saveString(LocationPref.LG, Double.toString(location.getLongitude()));
         locationPref.saveString(LocationPref.LA, Double.toString(location.getLatitude()));
 
-        Log.i(getClass().getSimpleName(), "onNewLocation: Distance " + UtilsLocation.getDistanceInKM(Double.toString(location.getLatitude()), Double.toString(location.getLongitude()), locationPref.getValue(LocationPref.LA), locationPref.getValue(LocationPref.LG)));
+        Log.i(getClass().getSimpleName(), "onNewLocation: Distance " + UtilsLocation.getDistanceInM(Double.toString(location.getLatitude()), Double.toString(location.getLongitude()), locationPref.getValue(LocationPref.LA), locationPref.getValue(LocationPref.LG)));
         Log.i(getClass().getSimpleName(), "onNewLocation: " + battery);
         Log.i(getClass().getSimpleName(), "onNewLocation: " + locationPref.getValue(LocationPref.ADDRESS));
         Log.i(getClass().getSimpleName(), "onNewLocation: " + locationPref.getValue(LocationPref.LA));
