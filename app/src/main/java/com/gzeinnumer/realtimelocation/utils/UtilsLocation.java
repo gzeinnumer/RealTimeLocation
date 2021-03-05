@@ -5,13 +5,12 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.preference.PreferenceManager;
-import android.util.Log;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
-public class Utils {
+public class UtilsLocation {
     static final String KEY_REQUESTING_LOCATION_UPDATES = "requesting_locaction_updates";
 
     static boolean requestingLocationUpdates(Context context) {

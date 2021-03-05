@@ -32,7 +32,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.gzeinnumer.realtimelocation.R;
 import com.gzeinnumer.realtimelocation.data.LocationPref;
-import com.gzeinnumer.realtimelocation.utils.Utils;
+import com.gzeinnumer.realtimelocation.utils.UtilsLocation;
 
 public class LocationUpdateService extends Service {
 
@@ -158,13 +158,13 @@ public class LocationUpdateService extends Service {
 
     public void requestLocationUpdates() {
         Log.i(getClass().getSimpleName(), "Requesting location updates");
-        Utils.setRequestingLocationUpdates(this, true);
+        UtilsLocation.setRequestingLocationUpdates(this, true);
         startService(new Intent(getApplicationContext(), LocationUpdateService.class));
         try {
             mFusedLocationClient.requestLocationUpdates(mLocationRequest,
                     mLocationCallback, Looper.myLooper());
         } catch (SecurityException unlikely) {
-            Utils.setRequestingLocationUpdates(this, false);
+            UtilsLocation.setRequestingLocationUpdates(this, false);
             Log.i(getClass().getSimpleName(), "Lost location permission. Could not request updates. " + unlikely);
         }
     }
@@ -173,10 +173,10 @@ public class LocationUpdateService extends Service {
         Log.i(getClass().getSimpleName(), "Removing location updates");
         try {
             mFusedLocationClient.removeLocationUpdates(mLocationCallback);
-            Utils.setRequestingLocationUpdates(this, false);
+            UtilsLocation.setRequestingLocationUpdates(this, false);
             stopSelf();
         } catch (SecurityException unlikely) {
-            Utils.setRequestingLocationUpdates(this, true);
+            UtilsLocation.setRequestingLocationUpdates(this, true);
             Log.i(getClass().getSimpleName(), "Lost location permission. Could not remove updates. " + unlikely);
         }
     }
@@ -184,7 +184,7 @@ public class LocationUpdateService extends Service {
     private Notification getNotification() {
         Intent intent = new Intent(this, LocationUpdateService.class);
 
-        CharSequence text = Utils.getLocationText(mLocation);
+        CharSequence text = UtilsLocation.getLocationText(mLocation);
 
         intent.putExtra(EXTRA_STARTED_FROM_NOTIFICATION, true);
 
@@ -238,11 +238,11 @@ public class LocationUpdateService extends Service {
         //if you wanto to active notification active this
         startForeground(NOTIFICATION_ID, getNotification());
 
-        locationPref.saveString(LocationPref.ADDRESS, Utils.getAddress(location, getApplicationContext()));
+        locationPref.saveString(LocationPref.ADDRESS, UtilsLocation.getAddress(location, getApplicationContext()));
         locationPref.saveString(LocationPref.LG, Double.toString(location.getLongitude()));
         locationPref.saveString(LocationPref.LA, Double.toString(location.getLatitude()));
 
-        Log.i(getClass().getSimpleName(), "onNewLocation: Distance " + Utils.getDistanceInKM(Double.toString(location.getLatitude()), Double.toString(location.getLongitude()), locationPref.getValue(LocationPref.LA), locationPref.getValue(LocationPref.LG)));
+        Log.i(getClass().getSimpleName(), "onNewLocation: Distance " + UtilsLocation.getDistanceInKM(Double.toString(location.getLatitude()), Double.toString(location.getLongitude()), locationPref.getValue(LocationPref.LA), locationPref.getValue(LocationPref.LG)));
         Log.i(getClass().getSimpleName(), "onNewLocation: " + battery);
         Log.i(getClass().getSimpleName(), "onNewLocation: " + locationPref.getValue(LocationPref.ADDRESS));
         Log.i(getClass().getSimpleName(), "onNewLocation: " + locationPref.getValue(LocationPref.LA));
@@ -251,7 +251,7 @@ public class LocationUpdateService extends Service {
         // Update notification content if running as a foreground service.
         if (serviceIsRunningInForeground(this)) {
             mNotificationManager.notify(NOTIFICATION_ID, getNotification());
-            locationPref.saveString(LocationPref.ADDRESS, Utils.getAddress(location, getApplicationContext()));
+            locationPref.saveString(LocationPref.ADDRESS, UtilsLocation.getAddress(location, getApplicationContext()));
             locationPref.saveString(LocationPref.LG, Double.toString(location.getLongitude()));
             locationPref.saveString(LocationPref.LA, Double.toString(location.getLatitude()));
         }
