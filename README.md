@@ -58,6 +58,19 @@ public class LocationUpdateService extends Service {
 
 ---
 
+- app
+  - data
+    - [LocationPref.java](https://github.com/gzeinnumer/RealTimeLocation/blob/master/app/src/main/java/com/gzeinnumer/realtimelocation/data/LocationPref.java)
+  - service
+    - [LocationUpdateService.java](https://github.com/gzeinnumer/RealTimeLocation/blob/master/app/src/main/java/com/gzeinnumer/realtimelocation/service/LocationUpdateService.java)
+  - utils
+    - [UtilsLocation.java](https://github.com/gzeinnumer/RealTimeLocation/blob/master/app/src/main/java/com/gzeinnumer/realtimelocation/utils/UtilsLocation.java)
+  - [MainActivity.java](https://github.com/gzeinnumer/RealTimeLocation/blob/master/app/src/main/java/com/gzeinnumer/realtimelocation/MainActivity.java)
+  - [SplashScreenActivity.java](https://github.com/gzeinnumer/RealTimeLocation/blob/master/app/src/main/java/com/gzeinnumer/realtimelocation/SplashScreenActivity.java)
+- [gradle](https://github.com/gzeinnumer/RealTimeLocation/blob/master/app/build.gradle)
+
+---
+
 ```
 Copyright 2021 M. Fadli Zein
 ```
