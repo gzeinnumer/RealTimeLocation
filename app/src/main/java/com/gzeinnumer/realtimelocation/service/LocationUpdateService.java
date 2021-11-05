@@ -19,6 +19,7 @@ import android.os.HandlerThread;
 import android.os.IBinder;
 import android.os.Looper;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
@@ -61,7 +62,8 @@ public class LocationUpdateService extends Service {
         }
     };
 
-    public LocationUpdateService() {}
+    public LocationUpdateService() {
+    }
 
     @Override
     public void onCreate() {
@@ -191,7 +193,7 @@ public class LocationUpdateService extends Service {
         PendingIntent servicePendingIntent = PendingIntent.getService(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
-                .setContentText("APP sedang aktif")
+                .setContentText("APP sedang aktif " + locationPref.getValue(LocationPref.LA) + "_" + locationPref.getValue(LocationPref.LG))
                 .setOngoing(false)
                 .setSound(null)
                 .setPriority(Notification.PRIORITY_DEFAULT)
@@ -247,6 +249,8 @@ public class LocationUpdateService extends Service {
         Log.i(getClass().getSimpleName(), "onNewLocation: " + locationPref.getValue(LocationPref.ADDRESS));
         Log.i(getClass().getSimpleName(), "onNewLocation: " + locationPref.getValue(LocationPref.LA));
         Log.i(getClass().getSimpleName(), "onNewLocation: " + locationPref.getValue(LocationPref.LG));
+
+        Toast.makeText(getApplicationContext(), locationPref.getValue(LocationPref.LA) + "_" + locationPref.getValue(LocationPref.LG), Toast.LENGTH_SHORT).show();
 
         // Update notification content if running as a foreground service.
         if (serviceIsRunningInForeground(this)) {

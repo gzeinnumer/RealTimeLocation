@@ -33,7 +33,7 @@ public class SplashScreenActivity extends AppCompatActivity {
     private void onSuccessCheckPermitions() {
         new Handler().postDelayed(() -> {
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
-        }, 4000);
+        }, 1000);
 
     }
 
